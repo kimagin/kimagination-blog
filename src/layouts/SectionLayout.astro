@@ -1,0 +1,25 @@
+---
+type Props = {
+  id: string
+  title: string
+  description?: string
+  fullScreen: boolean
+  centered?: boolean
+  classes?: string
+}
+
+const { id, title, description, fullScreen, centered, classes, ...rest } =
+  Astro.props
+---
+
+<section
+  {id}
+  class="flex"
+  class:list={[
+    fullScreen && 'min-h-screen w-screen',
+    centered && 'items-center justify-center',
+    classes,
+  ]}
+  {...rest}>
+  <slot />
+</section>
