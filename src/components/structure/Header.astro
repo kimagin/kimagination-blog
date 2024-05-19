@@ -8,31 +8,45 @@ interface Props {
 const { links } = Astro.props
 ---
 
-<nav
-  class="absolute top-0 left-0 right-0 flex justify-between container py-8 mx-auto px-2">
+<nav class="flex flex-none justify-between items-center lg:px-24 px-4 py-8">
   <!--  Logo   -->
-  <h1 class="text-xl font-bold">Kimagination</h1>
-  <div class="flex gap-8">
+  <div class="flex justify-center items-center gap-2">
+    <h1>⚫</h1>
+    <h1 class="text-xl font-bold">Black Hole</h1>
+  </div>
+  <div class="flex gap-4">
     <!--  Links -->
     <Link {links} />
-    <!--  Dark Mode Button -->
-    <label class="swap swap-rotate">
-      <!-- this hidden checkbox controls the state -->
-      <input
-        type="checkbox"
-        @click="dark=!dark"
-      />
+    <div class="flex gap-3">
+      <!-- GitHub Logo -->
+      <a
+        href="https://github.com/kimagin/kimagination-blog/"
+        class="flex justify-center items-center">
+        <Icon
+          name="github"
+          width={46}
+          height={46}
+        />
+      </a>
+      <!--  Dark Mode Button -->
+      <label class="swap swap-rotate">
+        <!-- this hidden checkbox controls the state -->
+        <input
+          type="checkbox"
+          @click="dark=!dark"
+        />
 
-      <!-- sun icon -->
-      <Icon
-        name="sun"
-        class="swap-on fill-current w-10 h-10"
-      />
-      <!-- moon icon -->
-      <Icon
-        name="moon"
-        class="swap-off fill-current w-10 h-10"
-      />
-    </label>
+        <!-- sun icon -->
+        <Icon
+          name="sun"
+          class="swap-on fill-current w-10 h-10"
+        />
+        <!-- moon icon -->
+        <Icon
+          name="moon"
+          class="swap-off fill-current w-10 h-10"
+        />
+      </label>
+    </div>
   </div>
 </nav>

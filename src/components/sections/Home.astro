@@ -14,14 +14,19 @@ const sectionID = 'home'
   fullScreen
   centered
   classes="flex-col">
-  <h1>Welcome to the best Astro Template</h1>
-  <div class="flex gap-2">
-    <button
-      x-data
-      @click="$dispatch('notify', { message: 'This is a notification containing information for the user', level: 'info' })"
-      class="btn btn-primary rounded-lg"
-      >Get Started</button
-    >
-    <button class="btn btn-primary rounded-lg btn-outline">learn more</button>
+  <div class="h-fit w-fit relative flex justify-center items-center flex-col">
+    <h1 class="relative z-10">Welcome to the best Astro Template</h1>
+
+    <div class="flex gap-2 relative z-10 py-8">
+      <button
+        x-data
+        @click="$dispatch('notify', { message: 'This is a notification containing information for the user', level: 'info' })"
+        class="btn btn-primary rounded-full"
+        >Read Blog Posts</button
+      >
+      <button class="btn btn-primary rounded-full btn-outline"
+        >learn more</button
+      >
+    </div>
   </div>
 </SectionLayout>

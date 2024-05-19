@@ -2,11 +2,21 @@
 const { links } = Astro.props
 ---
 
-<ul class="menu menu-horizontal rounded-lg">
+<ul class="menu menu-horizontal rounded-lg text-lg flex gap-3">
   {
     links.map((link: { href: string; title: string }) => (
       <li>
-        <a class="rounded-lg">{link.title}</a>
+        <a
+          class={
+            'rounded-lg px-2' +
+            ' ' +
+            (link.href === Astro.url.pathname
+              ? 'font-bold underline underline-offset-8 decoration-primary'
+              : '')
+          }
+          href={link.href}>
+          {link.title}
+        </a>
       </li>
     ))
   }

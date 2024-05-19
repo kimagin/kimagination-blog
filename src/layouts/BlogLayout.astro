@@ -1,0 +1,29 @@
+---
+import { AppConfig } from '../AppConfig'
+import Footer from '../components/structure/Footer.astro'
+import Head from '../components/structure/Head.astro'
+import Header from '../components/structure/Header.astro'
+
+interface Props {
+  title?: string
+}
+
+const { title } = Astro.props
+---
+
+<html
+  lang="en"
+  x-data="{ dark : $persist(false) }"
+  :data-theme="dark ? 'black' : 'light'">
+  <Head {title} />
+  <body>
+    <!-- Header -->
+    <Header links={AppConfig.links} />
+    <main class="prose max-w-full container mx-auto lg:px-24 px-4">
+      <!-- 		Main Content	 -->
+      <slot />
+    </main>
+    <!-- Footer -->
+    <Footer />
+  </body>
+</html>

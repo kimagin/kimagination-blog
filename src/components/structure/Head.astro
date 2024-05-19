@@ -23,3 +23,15 @@ const { title = 'Kimagination Blog' } = Astro.props
   />
   <title>{title}</title>
 </head>
+
+<style is:global>
+  h1 {
+    @apply text-5xl font-bold tracking-tight leading-normal;
+  }
+  h2 {
+    @apply text-3xl font-bold tracking-tight leading-normal;
+  }
+  h3 {
+    @apply text-xl font-bold tracking-tight leading-relaxed;
+  }
+</style>

@@ -1,0 +1,41 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro'
+import SectionLayout from '../layouts/SectionLayout.astro'
+import { _slugify } from '../ts/utils'
+import { getCollection, getEntryBySlug } from 'astro:content'
+
+const allBlogPosts = await getCollection('blog')
+console.log(allBlogPosts)
+
+const pageTitle = 'Blog'
+const id = _slugify(pageTitle)
+---
+
+<DefaultLayout>
+  <SectionLayout
+    fullScreen
+    {id}
+    classes="h-full gap-8"
+    title={pageTitle}>
+    <div class="flex container flex-col gap-2">
+      <h2>Recent Posts</h2>
+
+      <div class="divider divider-accent"></div>
+      {
+        allBlogPosts.map((post, index) => (
+          <div>
+            <h3>
+              <a href={'/blog/' + post.slug}> {post.data.title}</a>
+            </h3>
+            <p>{post.data.description}</p>
+            <div class="divider divider-base-100" />
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="w-1/3 flex justify-start items-start min-h-full pl-8 flex-col">
+      <h2>Tags</h2>
+    </div>
+  </SectionLayout>
+</DefaultLayout>
