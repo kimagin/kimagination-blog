@@ -1,0 +1,13 @@
+---
+const { links } = Astro.props
+---
+
+<ul class="menu menu-horizontal rounded-lg">
+  {
+    links.map((link: { href: string; title: string }) => (
+      <li>
+        <a class="rounded-lg">{link.title}</a>
+      </li>
+    ))
+  }
+</ul>

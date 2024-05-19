@@ -1,4 +1,5 @@
 ---
+import Toast from '../components/Toast.astro'
 import Home from '../components/sections/Home.astro'
 import DefaultLayout from '../layouts/DefaultLayout.astro'
 const pageTitle = 'Kimagination Blog - Home'
@@ -7,4 +8,6 @@ const pageTitle = 'Kimagination Blog - Home'
 <DefaultLayout title={pageTitle}>
   <!-- Page Sections -->
   <Home />
+
+  <Toast />
 </DefaultLayout>

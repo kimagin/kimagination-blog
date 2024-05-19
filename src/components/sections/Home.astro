@@ -16,7 +16,12 @@ const sectionID = 'home'
   classes="flex-col">
   <h1>Welcome to the best Astro Template</h1>
   <div class="flex gap-2">
-    <button class="btn btn-primary rounded-lg">Get Started</button>
+    <button
+      x-data
+      @click="$dispatch('notify', { message: 'This is a notification containing information for the user', level: 'info' })"
+      class="btn btn-primary rounded-lg"
+      >Get Started</button
+    >
     <button class="btn btn-primary rounded-lg btn-outline">learn more</button>
   </div>
 </SectionLayout>

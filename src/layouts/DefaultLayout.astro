@@ -8,6 +8,21 @@ interface Props {
 }
 
 const { title } = Astro.props
+
+const links = [
+  {
+    href: '/',
+    title: 'home',
+  },
+  {
+    href: '#contact',
+    title: 'contact',
+  },
+  {
+    href: '#about',
+    title: 'about',
+  },
+]
 ---
 
 <html
@@ -17,7 +32,7 @@ const { title } = Astro.props
   <Head {title} />
   <body>
     <!-- Header -->
-    <Header />
+    <Header {links} />
     <main class="prose">
       <!-- 		Main Content	 -->
       <slot />
