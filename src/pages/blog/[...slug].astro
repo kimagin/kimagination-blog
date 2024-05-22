@@ -31,5 +31,11 @@ const { Content } = await entry.render()
       ))
     }
   </ul>
+  <div class="w-full h-[70svh] overflow-hidden flex">
+    <img
+      src={entry.data.cover}
+      class="object-cover w-full h-ful"
+    />
+  </div>
   <Content />
 </BlogLayout>

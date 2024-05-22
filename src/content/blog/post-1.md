@@ -10,6 +10,8 @@ tags:
   - programming
 ---
 
+![An image of the Astro Website](https://images.unsplash.com/photo-1530378048420-7d9a2ed3ed72?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)
+
 # Astro: The Future of Web Development
 
 In the rapidly evolving landscape of web development, new tools and frameworks are continually emerging, each promising to make the development process more efficient and the end product more performant. One such framework that has been gaining attention is Astro. This blog post explores Astro and why it might be the future of web development.
