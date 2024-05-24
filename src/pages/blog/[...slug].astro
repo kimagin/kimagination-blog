@@ -4,11 +4,11 @@ import BlogLayout from '../../layouts/BlogLayout.astro'
 import { AppConfig } from '../../AppConfig'
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog')
-  return blogEntries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }))
+    const blogEntries = await getCollection('blog')
+    return blogEntries.map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+    }))
 }
 
 const { entry } = Astro.props
@@ -16,26 +16,36 @@ const { Content } = await entry.render()
 ---
 
 <BlogLayout title={`${entry.data.title} | ${AppConfig.title}`}>
-  <h4>{entry.data.title}</h4>
-  <h5>related tags:</h5>
-  <ul class="menu menu-horizontal rounded-lg m-0 mb-16 p-0 gap-4">
+    <div class="lg:px-24 px-4">
+        <h1 class="text-6xl font-normal my-6 leading-[4.2rem]">
+            {entry.data.title}
+        </h1>
+        <h5>related tags:</h5>
+        <ul class="menu menu-horizontal rounded-lg m-0 mb-16 p-0 gap-4">
+            {
+                entry.data.tags.map((tag) => (
+                    <li class="m-0 p-0 text-xs">
+                        <a
+                            class="rounded-lg m-0 p-0"
+                            href="#">
+                            {tag}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
     {
-      entry.data.tags.map((tag) => (
-        <li class="m-0 p-0 text-xs">
-          <a
-            class="rounded-lg m-0 p-0"
-            href="#">
-            {tag}
-          </a>
-        </li>
-      ))
+        entry.data.cover && (
+            <div class="h-[70svh] overflow-hidden flex">
+                <img
+                    src={entry.data.cover}
+                    class="object-cover w-full h-ful"
+                />
+            </div>
+        )
     }
-  </ul>
-  <div class="w-full h-[70svh] overflow-hidden flex">
-    <img
-      src={entry.data.cover}
-      class="object-cover w-full h-ful"
-    />
-  </div>
-  <Content />
+    <div class="lg:px-24 px-4">
+        <Content />
+    </div>
 </BlogLayout>
