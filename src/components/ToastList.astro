@@ -1,0 +1,75 @@
+---
+import Toast from './Toast.astro'
+---
+
+<div
+    x-ref="toastContainer"
+    x-data="toastList"
+    @notify.window="addToast($event.detail)"
+    class="flex flex-col
+ justify-end items-end h-screen top-0 w-full absolute p-4 pointer-events-none">
+    <template
+        x-for="toast in toasts"
+        :key="toast.startTime">
+        <Toast
+            message="toast.message"
+            level="toast.level"
+            progress="toast.progress"
+        />
+    </template>
+</div>
+<script>
+    import Alpine from 'alpinejs'
+    document.addEventListener('alpine:initializing', () => {
+        Alpine.data('toastList', () => ({
+            init() {
+                this.updateProgress()
+            },
+            toasts: [] as {
+                message: string
+                level: 'info' | 'warning' | 'error'
+                progress: number
+                id: Date
+                startTime: number
+            }[],
+            duration: 3000,
+            async addToast(toast: {
+                message: string
+                level: 'info' | 'warning' | 'error'
+            }) {
+                const id = new Date()
+                const startTime = performance.now()
+                this.toasts = [
+                    ...this.toasts,
+                    {
+                        message: toast.message,
+                        level: toast.level,
+                        progress: 0,
+                        id,
+                        startTime,
+                    },
+                ]
+                console.log(this.toasts)
+
+                setTimeout(() => {
+                    this.removeToast(id)
+                }, this.duration)
+            },
+            removeToast(id: Date) {
+                this.toasts = this.toasts.filter((toast) => toast.id !== id)
+            },
+            updateProgress() {
+                const now = performance.now()
+                this.toasts.forEach((toast, index) => {
+                    const elapsed = now - toast.startTime
+                    const progress = Math.min(
+                        (elapsed / this.duration) * 100,
+                        100
+                    )
+                    this.toasts[index].progress = progress
+                })
+                requestAnimationFrame(() => this.updateProgress())
+            },
+        }))
+    })
+</script>

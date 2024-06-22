@@ -1,74 +1,22 @@
-<div
-    x-data="toast"
-    x-show="notify"
-    @notify.window="handelNotify($event.detail)"
-    class="toast">
+---
+const { message, level, progress, ...rest } = Astro.props
+
+console.log(level)
+---
+
+<div class="toast relative px-0 py-2">
     <div
         x-ref="toast"
-        class="alert rounded-lg px-0 py-0 flex flex-col overflow-hidden"
-        :class="`alert-${level}`">
+        class="alert rounded-lg px-0 py-0 my-0 flex flex-col overflow-hidden">
         <span
-            x-text="message"
+            x-text={message}
             class="px-4 pt-4"
         ></span>
         <progress
             x-ref="progress"
             class="progress progress-base h-1 w-full"
-            value="40"
+            :value={progress}
             max="100"
         ></progress>
     </div>
 </div>
-
-<script>
-    //!TODO: Althogh the toast is working fine, but we need to create an arry to show multiple notifications at once :
-
-    import Alpine from 'alpinejs'
-    import { _delay } from '../ts/utils'
-    document.addEventListener('alpine:initializing', () => {
-        Alpine.data('toast', () => ({
-            notify: false,
-            message: '',
-            level: '',
-            async handelNotify(message: {
-                message: string
-                level: 'info' | 'warning' | 'error'
-            }) {
-                if (!this.notify) {
-                    this.notify = true
-                    this.message = message.message
-                    this.level = message.level
-
-                    const startTime = Date.now() // Record the start time
-
-                    const timeout = 3000 // Timeout duration in milliseconds
-
-                    const updateProgress = () => {
-                        const elapsedTime = Date.now() - startTime // Calculate time elapsed
-                        const progress = (elapsedTime / timeout) * 100 // Calculate progress percentage
-                        const progressEl = this.$refs
-                            .progress as HTMLProgressElement
-                        progressEl.value = progress
-                    }
-
-                    // Update progress initially
-                    updateProgress()
-
-                    await new Promise((resolve) => {
-                        const interval = setInterval(() => {
-                            updateProgress() // Update progress periodically
-                            const elapsedTime = Date.now() - startTime
-                            if (elapsedTime >= timeout) {
-                                clearInterval(interval) // Clear the interval when timeout is reached
-                                resolve((): void => {}) // Resolve the promise after the timeout
-                            }
-                        }, 30) // Update progress every 30 milliseconds
-                    })
-
-                    console.log('Notification timeout expired')
-                    this.notify = false
-                }
-            },
-        }))
-    })
-</script>

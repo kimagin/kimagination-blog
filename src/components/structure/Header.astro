@@ -33,7 +33,7 @@ const { links } = Astro.props
                 <!-- this hidden checkbox controls the state -->
                 <input
                     type="checkbox"
-                    @click="dark=!dark; $dispatch('notify', { message: dark ? 'Dark mode activated' : 'Light mode activated' }) "
+                    @click="dark=!dark; $dispatch('notify', {message: dark ? 'Dark Mode enabled!' : 'Light Mode enabled!'})"
                 />
 
                 <!-- sun icon -->
