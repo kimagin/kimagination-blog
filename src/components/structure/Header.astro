@@ -3,50 +3,50 @@ import { Icon } from 'astro-icon/components'
 import Link from '../Link.astro'
 
 interface Props {
-  links: { href: string; title: string }[]
+    links: { href: string; title: string }[]
 }
 const { links } = Astro.props
 ---
 
 <nav class="flex flex-none justify-between items-center lg:px-24 px-4 py-8">
-  <!--  Logo   -->
-  <div class="flex justify-center items-center gap-2">
-    <h1 class="text-lg">⚫</h1>
-    <h1 class="text-xl font-bold">Black Hole</h1>
-  </div>
-  <div class="flex gap-4">
-    <!--  Links -->
-    <Link {links} />
-    <div class="flex gap-3">
-      <!-- GitHub Logo -->
-      <a
-        href="https://github.com/kimagin/kimagination-blog/"
-        class="flex justify-center items-center">
-        <Icon
-          name="github"
-          width={46}
-          height={46}
-        />
-      </a>
-      <!--  Dark Mode Button -->
-      <label class="swap swap-rotate">
-        <!-- this hidden checkbox controls the state -->
-        <input
-          type="checkbox"
-          @click="dark=!dark"
-        />
-
-        <!-- sun icon -->
-        <Icon
-          name="sun"
-          class="swap-on fill-current w-10 h-10"
-        />
-        <!-- moon icon -->
-        <Icon
-          name="moon"
-          class="swap-off fill-current w-10 h-10"
-        />
-      </label>
+    <!--  Logo   -->
+    <div class="flex justify-center items-center gap-2">
+        <h1 class="text-lg">⚫</h1>
+        <h1 class="text-xl font-bold">Black Hole</h1>
     </div>
-  </div>
+    <div class="flex gap-4">
+        <!--  Links -->
+        <Link {links} />
+        <div class="flex gap-3">
+            <!-- GitHub Logo -->
+            <a
+                href="https://github.com/kimagin/kimagination-blog/"
+                class="flex justify-center items-center">
+                <Icon
+                    name="github"
+                    width={46}
+                    height={46}
+                />
+            </a>
+            <!--  Dark Mode Button -->
+            <label class="swap swap-rotate">
+                <!-- this hidden checkbox controls the state -->
+                <input
+                    type="checkbox"
+                    @click="dark=!dark; $dispatch('notify', { message: dark ? 'Dark mode activated' : 'Light mode activated' }) "
+                />
+
+                <!-- sun icon -->
+                <Icon
+                    name="sun"
+                    class="swap-on fill-current w-10 h-10"
+                />
+                <!-- moon icon -->
+                <Icon
+                    name="moon"
+                    class="swap-off fill-current w-10 h-10"
+                />
+            </label>
+        </div>
+    </div>
 </nav>
